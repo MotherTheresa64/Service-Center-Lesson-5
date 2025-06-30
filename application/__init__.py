@@ -18,12 +18,21 @@ def create_app(config_name=None):
     if config_name:
         app.config.from_object(f'config.{config_name}')
 
+    # Initialize extensions
     db.init_app(app)
+
+    # Health check endpoint
+    @app.route("/healthz")
+    def healthz():
+        return "", 200
+
+    # Register blueprints
     app.register_blueprint(mechanics_bp, url_prefix='/mechanics')
     app.register_blueprint(customers_bp, url_prefix='/customers')
     app.register_blueprint(inventory_bp, url_prefix='/inventory')
     app.register_blueprint(service_ticket_bp, url_prefix='/service-tickets')
 
+    # Swagger UI
     SWAGGER_URL = '/api/docs'
     API_URL     = '/static/swagger.yaml'
     swaggerui_bp = get_swaggerui_blueprint(
