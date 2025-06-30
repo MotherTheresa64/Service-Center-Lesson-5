@@ -1,0 +1,14 @@
+swagger: '2.0'
+info:
+  title: "Service Center API"
+  description: "Complete route documentation"
+  version: "1.0.0"
+host: "your-app.onrender.com"   # ← Replace with your Render service URL
+schemes:
+  - "https"
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+
+# ...paths and definitions as before...
